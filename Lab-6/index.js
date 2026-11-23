@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 const pipe = (...fns) => {
   for (const fn of fns) {
     if (typeof fn !== 'function') {
@@ -91,7 +89,6 @@ const f4 = compose(inc, twice, cube);
 console.log(f4(2));
 
 
-
 const divide = x => {
   if (x === 0) {
     throw new Error('Division by zero');
@@ -108,7 +105,6 @@ f5.on('error', error => {
 
 console.log(f5(2));
 console.log(f5(0));
-
 
 
 f5.on('error', error => {

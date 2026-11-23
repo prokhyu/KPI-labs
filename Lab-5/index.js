@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 function seq(...args) {
   const functions = [...args];
 
@@ -43,7 +41,6 @@ console.log(
      (x => x / 3)
      (x => x - 4)(7)
 );
-
 
 
 function array() {

@@ -1,6 +1,6 @@
 'use strict';
 
-// Task 1 - Sum using for
+
 
 function sum(...args) {
   let result = 0;
@@ -20,8 +20,6 @@ console.log(sum(1, -1, 1));
 console.log(sum(10, -1, -1, -1));
 
 
-// Task 2 - Sum using for...of
-
 function sumForOf(...args) {
   let result = 0;
 
@@ -39,8 +37,6 @@ console.log(sumForOf());
 console.log(sumForOf(1, -1, 1));
 console.log(sumForOf(10, -1, -1, -1));
 
-
-// Task 3 - Sum using while
 
 function sumWhile(...args) {
   let result = 0;
@@ -61,8 +57,6 @@ console.log(sumWhile());
 console.log(sumWhile(1, -1, 1));
 console.log(sumWhile(10, -1, -1, -1));
 
-
-// Task 4 - Sum using do...while
 
 function sumDoWhile(...args) {
   let result = 0;
@@ -88,8 +82,6 @@ console.log(sumDoWhile(1, -1, 1));
 console.log(sumDoWhile(10, -1, -1, -1));
 
 
-// Task 5 - Sum using reduce
-
 function sumReduce(...args) {
   return args.reduce((result, number) => result + number, 0);
 }
@@ -101,8 +93,6 @@ console.log(sumReduce());
 console.log(sumReduce(1, -1, 1));
 console.log(sumReduce(10, -1, -1, -1));
 
-
-// Task 6 - Maximum element in a two-dimensional array
 
 function max(matrix) {
   let result = -Infinity;
@@ -126,8 +116,6 @@ console.log(m);
 console.log(max([[10, 20], [30, 40]]));
 console.log(max([[-5, -2], [-10, -1]]));
 
-
-// Task 7 - Calculate ages using for...in
 
 function ages(persons) {
   const result = {};
