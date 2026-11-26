@@ -1,6 +1,5 @@
 'use strict';
 
-
 function iterate(object, callback) {
   for (const key in object) {
     if (Object.hasOwn(object, key)) {
@@ -36,6 +35,14 @@ const value = read();
 console.log(value);
 
 
+const PRIMITIVES = ['number', 'string', 'boolean', 'bigint', 'symbol', 'function'];
+
+const checkType = (value, Type) => {
+  const typeName = Type.name.toLowerCase();
+  if (PRIMITIVES.includes(typeName)) return typeof value === typeName;
+  return value instanceof Type;
+};
+
 function contract(fn, ...types) {
   const argumentTypes = types.slice(0, -1);
   const resultType = types[types.length - 1];
@@ -46,14 +53,14 @@ function contract(fn, ...types) {
     }
 
     for (let i = 0; i < args.length; i++) {
-      if (typeof args[i] !== argumentTypes[i].name.toLowerCase()) {
+      if (!checkType(args[i], argumentTypes[i])) {
         throw new TypeError(`Invalid type of argument ${i + 1}`);
       }
     }
 
     const result = fn(...args);
 
-    if (typeof result !== resultType.name.toLowerCase()) {
+    if (!checkType(result, resultType)) {
       throw new TypeError('Invalid result type');
     }
 
@@ -62,7 +69,6 @@ function contract(fn, ...types) {
 }
 
 console.log('Task 3:');
-
 
 const add = (a, b) => a + b;
 const addNumbers = contract(add, Number, Number, Number);
@@ -95,3 +101,7 @@ try {
 } catch (error) {
   console.log('Error:', error.message);
 }
+
+
+const first = contract(a => a[0], Array, Number);
+console.log(first([1, 2, 3])); 
