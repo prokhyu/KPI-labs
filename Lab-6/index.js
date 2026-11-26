@@ -1,11 +1,15 @@
 'use strict';
 
-const pipe = (...fns) => {
+const checkFunctions = fns => {
   for (const fn of fns) {
     if (typeof fn !== 'function') {
       throw new TypeError('All arguments must be functions');
     }
   }
+};
+
+const pipe = (...fns) => {
+  checkFunctions(fns);
 
   return x => {
     let result = x;
@@ -39,11 +43,7 @@ try {
 
 
 const compose = (...fns) => {
-  for (const fn of fns) {
-    if (typeof fn !== 'function') {
-      throw new TypeError('All arguments must be functions');
-    }
-  }
+  checkFunctions(fns);
 
   const listeners = [];
 
@@ -60,8 +60,8 @@ const compose = (...fns) => {
       for (const listener of listeners) {
         try {
           listener(error);
-        } catch (listenerError) {
-          
+        } catch {
+          // помилка в обробнику не повинна ламати інші обробники
         }
       }
 
@@ -82,12 +82,9 @@ const compose = (...fns) => {
 
 console.log('Task 2:');
 
-
-
 const f4 = compose(inc, twice, cube);
 
 console.log(f4(2));
-
 
 const divide = x => {
   if (x === 0) {
@@ -106,9 +103,8 @@ f5.on('error', error => {
 console.log(f5(2));
 console.log(f5(0));
 
-
 f5.on('error', error => {
   console.log('Second handler:', error.message);
 });
 
-console.log(f5(0));
+console.log(f5(0)); 

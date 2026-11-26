@@ -1,9 +1,11 @@
 'use strict';
 
-function seq(...args) {
-  const functions = [...args];
+function seq(...functions) {
+  return function chain(value) {
+    if (typeof value === 'function') {
+      return seq(...functions, value);
+    }
 
-  function chain(value) {
     if (typeof value === 'number') {
       let result = value;
 
@@ -14,13 +16,8 @@ function seq(...args) {
       return result;
     }
 
-    if (typeof value === 'function') {
-      functions.push(value);
-      return chain;
-    }
-  }
-
-  return chain;
+    throw new TypeError('Argument must be a function or a number');
+  };
 }
 
 console.log('Task 1:');

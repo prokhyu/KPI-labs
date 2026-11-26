@@ -1,6 +1,5 @@
 'use strict';
 
-
 function removeElement(array, item) {
   const index = array.indexOf(item);
 
@@ -23,7 +22,6 @@ removeElement(cities, 'Lima');
 removeElement(cities, 'Berlin');
 
 console.log(cities);
-
 
 function removeElements(array, ...items) {
   for (const item of items) {
@@ -49,49 +47,19 @@ const cities2 = ['Kiev', 'Beijing', 'Lima', 'Saratov'];
 removeElements(cities2, 'Lima', 'Berlin', 'Kiev');
 
 console.log(cities2);
-
-
-function unique(array) {
-  const result = [];
-
-  for (const item of array) {
-    if (!result.includes(item)) {
-      result.push(item);
-    }
-  }
-
-  return result;
-}
+const unique = array => [...new Set(array)];
 
 console.log('Task 3:');
 
-const numbers3 = [1, 2, 3, 2, 1, 4, 5, 4];
-console.log(unique(numbers3));
+console.log(unique([2, 1, 1, 3, 2]));                  
+console.log(unique(['top', 'bottom', 'top', 'left'])); 
 
-const cities3 = ['Kiev', 'Beijing', 'Kiev', 'Lima', 'Beijing'];
-console.log(unique(cities3));
-
-
-function difference(array1, array2) {
-  const result = [];
-
-  for (const item of array1) {
-    if (!array2.includes(item)) {
-      result.push(item);
-    }
-  }
-
-  return result;
-}
+const difference = (array1, array2) => {
+  const exclude = new Set(array2);
+  return array1.filter(item => !exclude.has(item));
+};
 
 console.log('Task 4:');
 
-const array1 = [1, 2, 3, 4, 5];
-const array2 = [2, 4, 6];
-
-console.log(difference(array1, array2));
-
-const cities4 = ['Kiev', 'Beijing', 'Lima', 'Saratov'];
-const cities5 = ['Beijing', 'Berlin', 'Saratov'];
-
-console.log(difference(cities4, cities5));
+console.log(difference([7, -2, 10, 5, 0], [0, 10]));                     
+console.log(difference(['Beijing', 'Kiev'], ['Kiev', 'London', 'Baghdad'])); 
